@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>YASSER TECH TV</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#000;color:#fff}
+#bg{
+position:fixed;top:50%;left:50%;
+transform:translate(-50%,-50%);
+font-size:11vw;font-weight:900;
+color:#ffcc00;opacity:.1;z-index:-1;
+}
+header{text-align:center;padding:2rem;background:#000}
+header h1{color:#ffcc00;font-size:3rem}
+header p{color:#aaa}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:1.5rem;
+padding:2rem;
+}
+.card{
+background:#111;border-radius:14px;
+overflow:hidden;transition:.3s;
+}
+.card:hover{transform:scale(1.05)}
+.card img{width:100%;height:260px;object-fit:cover}
+.card h3{padding:.5rem}
+.card p{padding:0 .5rem;color:#aaa;font-size:.85rem}
+.actions a{
+display:block;margin:.5rem;
+background:#ffcc00;color:#000;
+text-align:center;padding:.5rem;
+border-radius:8px;font-weight:bold;
+text-decoration:none;
+}
+footer{text-align:center;color:#777;padding:1rem}
+</style>
+</head>
+
+<body>
+
+<div id="bg">YASSER TECH TV</div>
+
+<header>
+<h1>YASSER TECH TV</h1>
+<p>Movies & TV Shows • Official Platforms</p>
+</header>
+
+<div class="grid" id="content"></div>
+
+<footer>© 2026 YASSER TECH SOLUTIONS</footer>
+
+<script>
+// 🔗 READ FROM ADMIN PANEL
+const data = JSON.parse(localStorage.getItem("yasser_content") || "[]");
+const box = document.getElementById("content");
+
+if(data.length===0){
+box.innerHTML="<p style='padding:2rem;color:#aaa'>No content yet. Add from Admin Panel.</p>";
+}
+
+data.forEach(m=>{
+box.innerHTML+=`
+<div class="card">
+<img src="${m.poster}">
+<h3>${m.title}</h3>
+<p>${m.type.toUpperCase()} • ${m.year}</p>
+<div class="actions">
+<a href="https://www.youtube.com/results?search_query=${encodeURIComponent(m.title+' trailer')}" target="_blank">
+▶ Watch Trailer
+</a>
+<a href="https://www.google.com/search?q=watch ${encodeURIComponent(m.title)} online" target="_blank">
+🌍 Official Platform
+</a>
+</div>
+</div>
+`;
+});
+</script>
+
+</body>
+</html>
